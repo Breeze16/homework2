@@ -28,13 +28,13 @@ public class UserInterface : MonoBehaviour {
         else {
             if (GUI.RepeatButton(new Rect(10, 10, 100, 40), "Help")) GUI.TextArea(new Rect(10, 60, 750, 100), scene.getBaseCode().gameRule);
             else if (!state.isMoving()) {
-                if (GUI.Button(new Rect(castw(2f), casth(6f), width, height), "Go")) action.moveBoat();
-                if (GUI.Button(new Rect(castw(10.5f), casth(4f), width, height), "Devil On")) action.devilSOnB();
-                if (GUI.Button(new Rect(castw(4.29f), casth(4f), width, height), "Priest On")) action.priestSOnB();
-                if (GUI.Button(new Rect(castw(1.06f), casth(4f), width, height), "Devil On")) action.devilEOnB();
-                if (GUI.Button(new Rect(castw(1.26f), casth(4f), width, height), "Priest On")) action.priestEOnB();
-                if (GUI.Button(new Rect(castw(2.5f), casth(1.3f), width, height), "Left Off")) action.offBoatL();
-                if (GUI.Button(new Rect(castw(1.6f), casth(1.3f), width, height), "Right Off")) action.offBoatR();
+                if (GUI.Button(new Rect(castw(2f), casth(6f), width, height), "开船")) action.moveBoat();
+                if (GUI.Button(new Rect(castw(10.5f), casth(4f), width, height), "恶魔上船")) action.devilSOnB();
+                if (GUI.Button(new Rect(castw(4.29f), casth(4f), width, height), "牧师上船")) action.priestSOnB();
+                if (GUI.Button(new Rect(castw(1.06f), casth(4f), width, height), "恶魔上船")) action.devilEOnB();
+                if (GUI.Button(new Rect(castw(1.26f), casth(4f), width, height), "牧师上船")) action.priestEOnB();
+                if (GUI.Button(new Rect(castw(2.5f), casth(1.3f), width, height), "左侧下船")) action.offBoatL();
+                if (GUI.Button(new Rect(castw(1.6f), casth(1.3f), width, height), "右侧下船")) action.offBoatR();
             }
         }
     }
