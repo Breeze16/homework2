@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using Com.Mygame;
 
 namespace Com.Mygame {
-    // 定义了行为的接口
     public interface UserActions {
         void priestSOnB();
         void priestEOnB();
@@ -15,14 +14,14 @@ namespace Com.Mygame {
         void offBoatR();
         void restart();
     }
-    // 获取当前游戏对象的运动状态
+   
     public interface QueryGameStatus {
         bool isMoving();
         void setMoving(bool state);
         string getMessage();
         void setMessage(string message);
     }
-    // 游戏场景控制，负责创造实例，关联游戏对象，定义动作等
+   
     public class GameSceneController : System.Object, UserActions, QueryGameStatus {
         private static GameSceneController _instance;
         private BaseCode _base_code;
@@ -60,18 +59,18 @@ namespace Com.Mygame {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
-    // 动作事件接口
+    
     public interface ISSActionCallback {
         void OnActionCompleted(SSAction action);
     }
-    // 动作管理器
+    
     public class SSActionManager : System.Object {
         private static SSActionManager _instance;
         public static SSActionManager GetInstance() {
             if (_instance == null) _instance = new SSActionManager();
             return _instance;
         }
-        // 实例对象在具体调用时只需要简单地修改接口中的参数即可实现移动
+        /
         public SSAction ApplyCCMoveToAction(GameObject obj, Vector3 target, float speed, ISSActionCallback completed) {
             CCMoveToAction ac = obj.AddComponent<CCMoveToAction>();
             ac.RunAction(target, speed, completed);
@@ -158,7 +157,7 @@ namespace Com.Mygame {
 }
 
 public class BaseCode : MonoBehaviour {
-    // 游戏规则
+    
     public string gameRule;
 
     void Start() {
