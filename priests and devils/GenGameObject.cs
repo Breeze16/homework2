@@ -8,13 +8,13 @@ public class GenGameObject : MonoBehaviour {
     Stack<GameObject> priests_end = new Stack<GameObject>();
     Stack<GameObject> devils_start = new Stack<GameObject>();
     Stack<GameObject> devils_end = new Stack<GameObject>();
-    // 为船设置2个位子，同时设定船的移动速度，岸上或船上牧师或者魔鬼的间距
+    
     GameObject[] boat = new GameObject[2];
     GameObject boat_obj;
     int side = 1; 
     public float speed = 6f;
     float gap = 1.2f;
-    // 预设了游戏中所有对象的所处位置
+  
     Vector3 shoreStartPos = new Vector3(-19, 0, 0);
     Vector3 shoreEndPos = new Vector3(8, 0, 0);
     Vector3 boatStartPos = new Vector3(-11, 0, 0);
@@ -23,7 +23,7 @@ public class GenGameObject : MonoBehaviour {
     Vector3 priestEndPos = new Vector3(4, 2f, 0);
     Vector3 devilStartPos = new Vector3(-23, 2f, 0);
     Vector3 devilEndPos = new Vector3(10, 2f, 0);
-    // 载入预置的游戏对象
+    
     void Start() {
         GameSceneController.GetInstance().setGenGameObject(this);
         Instantiate(Resources.Load("Prefabs/Directional Light"));
@@ -39,14 +39,14 @@ public class GenGameObject : MonoBehaviour {
             devils_start.Push(devil);
         }
     }
-    // 判断船上是否已满
+    
     int boatCapacity() {
         int capacity = 0;
         for (int i = 0; i < 2; ++i)
             if (boat[i] == null) capacity++;
         return capacity;
     }
-    // 实现上床动作，在这个过程中牧师或者魔鬼会以transform的形式到达船上
+    
     void getOnTheBoat(GameObject obj) {
         if (boatCapacity() != 0) {
             obj.transform.parent = boat_obj.transform;
@@ -62,7 +62,7 @@ public class GenGameObject : MonoBehaviour {
             SSActionManager.GetInstance().ApplyCCMoveToYZAction(obj, target, speed);
         }
     }
-    // 开船，直接调用SSActionManager中的方法即可
+   
     public void moveBoat() {
         if (boatCapacity() != 2) {
             if (side == 1) {
@@ -75,7 +75,7 @@ public class GenGameObject : MonoBehaviour {
             }
         }
     }
-    // 下船，与上船的判断类似
+   
     public void getOffTheBoat(int bside) {
         if (boat[bside] != null) {
             boat[bside].transform.parent = null;
@@ -104,7 +104,7 @@ public class GenGameObject : MonoBehaviour {
             boat[bside] = null;
         }
     }
-    // 牧师或者魔鬼对上船方法的调用
+   
     public void priestStartOnBoat() {
         if (priests_start.Count != 0 && boatCapacity() != 0 && side == 1) getOnTheBoat(priests_start.Pop());
     }
@@ -118,10 +118,10 @@ public class GenGameObject : MonoBehaviour {
         if (devils_end.Count != 0 && boatCapacity() != 0 && side == 2) getOnTheBoat(devils_end.Pop());
     }
 
-    // 获取游戏对象的位置
+    
     Vector3 getCharacterPosition(Vector3 pos, int index) { return new Vector3(pos.x + gap * index, pos.y, pos.z); }
 
-    // 每一次上船或者下船之后，游戏都会进行相关变量的增减，同时判断当前游戏是否胜利或失败
+    
     void Update() {
         GameSceneController scene = GameSceneController.GetInstance();
         int pOnb = 0, dOnb = 0;
